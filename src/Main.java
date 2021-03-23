@@ -1,19 +1,55 @@
 public class Main {
     public static void main(final String[] args) {
-        Box<Box<Fruit>> box1 = new Box<>();
-        Box<Fruit> box2 = new Box<>();
-        Box<Fruit> box3 = new Box<>();
-        Box<Fruit> box4 = new Box<>();
-        Fruit fruit = new Apple();
-        box2.put(fruit);
+        Box<Apple> srcBox = new Box<>();
+        srcBox.put(new Apple());
+        Box<Object> destBox = new Box<>();
+        BoxUtil.copyFromBoxToBox(srcBox, destBox);
+        System.out.println(destBox.get());
+        Box<Apple> srcBox1 = new Box<>();
+        srcBox.put(new Apple());
+        Box<Apple> destBox1 = new Box<>();
+        BoxUtil.copyFreshFruitFromBoxToBox(srcBox1, destBox1);
+        System.out.println(destBox1.get());
+        Box<Apple> srcBox3 = new Box<>();
+        srcBox.put(new Apple());
+        Box<Object> destBox3 = new Box<>();
+        BoxUtil.copyFreshFruitFromBoxToBox(srcBox3, destBox3);
+        System.out.println(destBox3.get());
+        Box<Apple> srcBox4 = new Box<>();
+        Apple apple = new Apple();
+        apple.setFresh(false);
+        srcBox.put(apple);
+        Box<Object> destBox4 = new Box<>();
+        BoxUtil.copyFreshFruitFromBoxToBox(srcBox4, destBox4);
+        System.out.println(destBox4.get());
+        Box<Apple> srcBox5 = new Box<>();
+        Box<Object> destBox5 = new Box<>();
+        BoxUtil.copyFreshFruitFromBoxToBox(srcBox5, destBox5);
+        System.out.println(destBox5.get());
+        Box<Apple> box2 = new Box<>();
+        box2.put(new Apple());
+        Box<Box<Apple>> box1 = new Box<>();
         box1.put(box2);
-
-        BoxUtil.copyFromBoxToBox(box2, box3);
-        BoxUtil.copyFreshFruitFromBoxToBox(box2, box4);
-        BoxUtil.printElementFromTwoBoxes(box4);
-        BoxUtil.printElementFromTwoBoxes(box3);
         BoxUtil.printElementFromTwoBoxes(box1);
-        BoxUtil.printElementFromTwoBoxes(box2);
-        BoxUtil.printElementFromBoxes(box1);
+        Box<Apple> box3 = new Box<>();
+        box3.put(new Apple());
+        Box<Object> box22 = new Box<>();
+        box22.put(box3);
+        Box<Box<Object>> box11 = new Box<>();
+        box11.put(box22);
+        BoxUtil.printElementFromTwoBoxes(box11);
+        Box<Apple> box31 = new Box<>();
+        box31.put(new Apple());
+        Box<Object> box21 = new Box<>();
+        box21.put(box31);
+        Box<Box<Object>> box12 = new Box<>();
+        box12.put(box21);
+        BoxUtil.printElementFromBoxes(box12);
+        Box<Apple> box = new Box<>();
+        box.put(new Apple());
+        BoxUtil.printElementFromBoxes(box);
+        Box<String> box4 = new Box<>();
+        box4.put("String");
+        BoxUtil.printElementFromBoxes(box4);
     }
 }

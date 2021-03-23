@@ -1,20 +1,20 @@
 public class BoxUtil {
-    public static <T> void copyFromBoxToBox(final Box<T> src, final Box<T> dest) {
+    public static <T> void copyFromBoxToBox(final Box<T> src, final Box<? super T> dest) {
         dest.put(src.get());
     }
 
-    public static void copyFreshFruitFromBoxToBox(final Box<? extends Fruit> src, final Box<? super Fruit> dest) {
-        if (src.get().getFresh()) {
+    public static <T extends Fruit> void copyFreshFruitFromBoxToBox(final Box<T> src, final Box<? super T> dest) {
+        if (src.get() != null && src.get().getFresh()) {
             dest.put(src.get());
         }
     }
 
-    public static void printElementFromTwoBoxes(final Box<?> box) {
-        System.out.println(box.get().toString());
+    public static <T> void printElementFromTwoBoxes(final Box<Box<T>> box) {
+        System.out.println(box.get().get().toString());
     }
 
     public static <T> void printElementFromBoxes(final Box<T> box) {
-       if (box.get() instanceof Fruit) {
+       if (!(box.get() instanceof Box)) {
            System.out.println(box.get().toString());
        } else {
            printElementFromBoxes((Box<T>) box.get());
